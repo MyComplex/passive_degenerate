@@ -11,39 +11,52 @@ function writePassword() {
 }
 
 function generatePassword() {
-  //my code
-  // variables
-  var passLength = prompt('How many characters long would you like your password to be?');
-  //input validation
-    if (passLength == null) {
-      alert("Response cannot be blank. Please enter a whole number value.");
-      return;
-    } 
-    
-    passLength=parseInt(passLength);
+// Código de Jesus.
+// Setting variables.
+// The passLength variable stores the input from the prompt, parseInt converts the input to an integer, or NaN if letters are input.
+  var passLength = parseInt(prompt('How many characters would you like the password to contain?'));
 
-    if (passLength < 8 || passLength > 128) {
-      alert("Length must be between 8 and 128 characters.");
-      return;
-    }
+// Validate value of the passLength variable.
+  if (isNaN(passLength)) {
+    alert("Input must be an integer.");
+    return "Please try again.";
+  }
 
-    var includeLowercaseLetters = confirm('Do you want to include lowercase letters?');
-  var includeUppercaseLetters = confirm('Do you want to include uppercase letters?');
-  var includeNumbers = confirm('Do you want to include numbers?')
-  var includeSymbols = confirm('Do you want to include symbols?');
+  if (passLength < 8 || passLength > 128) {
+    alert("Length must be between 8 and 128 characters.");
+    return "Please try again.";
+  }
+
+// Choose to include the character options.
+  var includeLowercaseLetters = confirm("Would you like to include lowercase letters? OK (Y), Cancel (N)");
+  var includeUppercaseLetters = confirm("Would you like to include uppercase letters? OK (Y), Cancel (N)");
+  var includeNumbers = confirm("Would you like to include numbers? OK (Y), Cancel (N)");
+  var includeSymbols = confirm("Would you like to include symbols? OK (Y), Cancel (N)");
+
+// Confirm 'OK' for at least one of the selections.
+if (includeLowercaseLetters == false && includeUppercaseLetters == false && includeNumbers == false && includeSymbols ==false) {
+  alert("You must include at least one of the character options.");
+  return "Please try again.";
+}
+
+// Initialize empty variables.
   var selections = [];
   var gennedPW = "";
 
-  //constants
-  // Lowercase letters
+// Defining character option constants, and converting the string value to an array.
+// Lowercase letters
   const lowerCase = "abcdefghijklmnopqrstuvwxyz".split("");
-  //Uppercase letters
+  
+// Uppercase letters
   const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  //Numbers
+  
+// Numbers
   const numbers = "0123456789".split("");
-  //Symbols
+  
+// Symbols
   const symbols = "~`!@#$%^&*()-_+{[}]|=<,.>?".split("");
 
+// Avarngers assemble!
   if (includeLowercaseLetters) {
     for (var x = 0; x < lowerCase.length; x++) {
       selections.push(lowerCase[x])
@@ -72,43 +85,10 @@ function generatePassword() {
     gennedPW += selections[Math.floor(Math.random() * selections.length)];
   }
 
-  return gennedPW;
+// Output result.
+return gennedPW;
 
-  //checks
-  console.log(passLength);
-  console.log(includeLowercaseLetters);
-  console.log(includeUppercaseLetters);
-  console.log(includeNumbers);
-  console.log(includeSymbols);
-  console.log(lowerCase[Math.floor(Math.random() * lowerCase.length)]);
-  console.log(upperCase[Math.floor(Math.random() * upperCase.length)]);
-  console.log(numbers[Math.floor(Math.random() * numbers.length)]);
-  console.log(symbols[Math.floor(Math.random() * symbols.length)]);
-  console.log(selections);
-
-}
+};
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-// may not need
-// function begin(passLength) {
-//   passLength = prompt("How many characters long would you like your password to be?");
-  
-//   if (passLength == null) {
-//       alert("Response cannot be blank. Please enter a value.");
-//   } 
-  
-//   if (passLength < 8 && passLength > 128) {
-//     alert("Length must be between 8 and 128 characters.");
-//   }
-  
-  // else if (includeLowercaseLetters = confirm("Do you want to include lowercase letters?")) {
-  //     if (includeLowercaseLetters = true) {
-  //     alert("Lowercase letters included.");
-  //   }
-  // } else console.log("I don't get it!!");
-// }
-
-//testing
-// begin();
